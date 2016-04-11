@@ -25,7 +25,7 @@ public class player_controller : MonoBehaviour {
 		// rotate downward
 		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 		{
-			rb.AddTorque(new Vector3(-speed, 0, 0f));
+			rb.AddTorque(new Vector3(0, 0, -speed));
 		}
 
 		// rotate left
@@ -37,7 +37,7 @@ public class player_controller : MonoBehaviour {
 		// rotate upward
 		if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
 		{
-			rb.AddTorque(new Vector3(speed, 0, 0f));
+			rb.AddTorque(new Vector3(0, 0, speed));
 		}
 
 		// rotate right
