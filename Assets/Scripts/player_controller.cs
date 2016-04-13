@@ -4,6 +4,7 @@ using System.Collections;
 public class player_controller : MonoBehaviour {
 	public Rigidbody rb;
 	public float speed;
+	public GameObject projectile;
 
 	private Vector3 currentVelocity = Vector3.zero;
 	private Vector3 currentAngularVelocity = Vector3.zero;
@@ -25,25 +26,25 @@ public class player_controller : MonoBehaviour {
 		// rotate downward
 		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
 		{
-			rb.AddTorque(new Vector3(-speed, 0, 0));
+			rb.AddRelativeTorque(new Vector3(-speed, 0, 0));
 		}
 
 		// rotate left
 		if (Input.GetKey(KeyCode.A) || (Input.GetKey(KeyCode.LeftArrow)))
 		{
-			rb.AddTorque(new Vector3(0f, speed, 0f));
+			rb.AddRelativeTorque(new Vector3(0f, speed, 0f));
 		}
 
 		// rotate upward
 		if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
 		{
-			rb.AddTorque(new Vector3(speed, 0, 0));
+			rb.AddRelativeTorque(new Vector3(speed, 0, 0));
 		}
 
 		// rotate right
 		if (Input.GetKey(KeyCode.D) || (Input.GetKey(KeyCode.RightArrow)))
 		{
-			rb.AddTorque(new Vector3(0f, -speed, 0f));
+			rb.AddRelativeTorque(new Vector3(0f, -speed, 0f));
 		}
 
 		// stabilize
@@ -58,6 +59,12 @@ public class player_controller : MonoBehaviour {
 			{
 				rb.angularVelocity = Vector3.SmoothDamp(rb.angularVelocity, Vector3.zero, ref currentAngularVelocity, 0.5f);
 			}
+		}
+
+		if (Input.GetKeyDown(KeyCode.LeftControl))
+		{
+			GameObject blaster = GameObject.FindGameObjectWithTag("blaster");
+			Instantiate(projectile, blaster.transform.position, blaster.transform.rotation);
 		}
 	}
 }
