@@ -10,7 +10,6 @@ public class capsule_controller : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		rb = GetComponent<Rigidbody>();
 		direction = transform.forward;
 	}
