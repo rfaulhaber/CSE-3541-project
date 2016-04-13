@@ -18,6 +18,6 @@ public class capsule_controller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		rb.AddForce(direction * projectileForce);
-		Destroy(gameObject, 3f);
+		Destroy(gameObject, 1.5f);
 	}
 }

@@ -4,16 +4,27 @@ using System.Collections;
 public class camera_controller : MonoBehaviour {
 
 	public GameObject player;
+	public TextMesh speedText;
+	public TextMesh directionText;
+	public TextMesh scoreMesh;
 
-	private Vector3 offset;
+	private float playerSpeed;
+	private Vector3 playerDirection;
+	private Rigidbody playerRB;
 
 	void Start()
 	{
-		offset = transform.position - player.transform.position;
+		playerRB = player.GetComponent<Rigidbody>();
+		playerSpeed = playerRB.velocity.magnitude;
+		playerDirection = playerRB.transform.forward;
 	}
 
 	void LateUpdate()
 	{
-		transform.position = player.transform.position + new Vector3(Mathf.Cos(player.transform.position.x), Mathf.Sin(player.transform.position.y)) + offset;
+		playerSpeed = playerRB.velocity.magnitude;
+		playerDirection = playerRB.transform.eulerAngles;
+
+		speedText.text = playerSpeed.ToString();
+		directionText.text = playerDirection.ToString();
 	}
 }
