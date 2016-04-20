@@ -17,6 +17,11 @@ public class capsule_controller : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		rb.AddForce(direction * projectileForce);
-		Destroy(gameObject, 1.5f);
-	}
+		Destroy(gameObject, 2.5f);
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+
+    }
 }
