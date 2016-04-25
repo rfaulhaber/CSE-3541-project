@@ -6,7 +6,6 @@ public class make_asteroid : MonoBehaviour {
     public float make = 1f;
     // Use this for initialization
     void Start () {
-
         for (int i = 0; i < 50; i++)
         {
             MakeRandAsteroid(Random.Range(1, 7));

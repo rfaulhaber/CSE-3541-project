@@ -48,7 +48,7 @@ public class player_controller : MonoBehaviour {
 		}
 
 		// stabilize
-		if (Input.GetKey(KeyCode.Q))
+		if (Input.GetKey(KeyCode.Tab))
 		{
 			if (rb.velocity != Vector3.zero)
 			{ 
@@ -61,10 +61,30 @@ public class player_controller : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetKeyDown(KeyCode.LeftControl))
+		if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetMouseButtonDown(0))
 		{
 			GameObject blaster = GameObject.FindGameObjectWithTag("blaster");
 			Instantiate(projectile, blaster.transform.position, blaster.transform.rotation);
+		}
+
+		// if you're not moving forward and your moving, progressively slow down
+		if (!Input.GetKey(KeyCode.Space) && rb.velocity != Vector3.zero && !Input.GetKey(KeyCode.Tab))
+		{
+			rb.velocity = Vector3.SmoothDamp(rb.velocity, Vector3.zero, ref currentVelocity, 1.5f);
+		}
+
+		if (rb.angularVelocity != Vector3.zero && (!(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) && !(Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) && !(Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.A)) && !(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow)) && !Input.GetKey(KeyCode.Tab)))
+		{
+			rb.angularVelocity = Vector3.SmoothDamp(rb.angularVelocity, Vector3.zero, ref currentAngularVelocity, 1f);
+		}
+	}
+
+	void OnCollisionEnter(Collision col)
+	{
+		if (col.gameObject.name.Contains("asteroid"))
+		{
+			GameObject player = GameObject.FindGameObjectWithTag("Player");
+			score_controller.playerDeath(ref player);
 		}
 	}
 }

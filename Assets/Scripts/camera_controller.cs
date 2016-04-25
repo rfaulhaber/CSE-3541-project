@@ -7,6 +7,7 @@ public class camera_controller : MonoBehaviour {
 	public TextMesh speedText;
 	public TextMesh directionText;
 	public TextMesh scoreMesh;
+	public TextMesh livesMesh;
 
 	private float playerSpeed;
 	private Vector3 playerDirection;
@@ -19,6 +20,14 @@ public class camera_controller : MonoBehaviour {
 		playerDirection = playerRB.transform.forward;
 	}
 
+	void Update()
+	{
+		if (Input.GetMouseButtonDown(1))
+		{
+			Debug.Log("Adjust camera!");
+		}
+	}
+
 	void LateUpdate()
 	{
 		playerSpeed = playerRB.velocity.magnitude;
@@ -26,5 +35,8 @@ public class camera_controller : MonoBehaviour {
 
 		speedText.text = playerSpeed.ToString();
 		directionText.text = playerDirection.ToString();
+
+		scoreMesh.text = "Score: " + score_controller.score.ToString();
+		livesMesh.text = "Lives: " + score_controller.lives.ToString();
 	}
 }

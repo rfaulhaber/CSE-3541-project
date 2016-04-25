@@ -41,6 +41,7 @@ public class small_asteroid_controller : MonoBehaviour {
         }
         if (col.gameObject.name == "Projectile(Clone)")
         {
+			score_controller.score++;
             Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
             Destroy(col.gameObject);
             Destroy(gameObject);
