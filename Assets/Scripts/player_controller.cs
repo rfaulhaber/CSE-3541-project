@@ -63,8 +63,11 @@ public class player_controller : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetMouseButtonDown(0))
 		{
-			GameObject blaster = GameObject.FindGameObjectWithTag("blaster");
-			Instantiate(projectile, blaster.transform.position, blaster.transform.rotation);
+			if (score_controller.state == score_controller.GameState.PLAYING)
+			{
+				GameObject blaster = GameObject.FindGameObjectWithTag("blaster");
+				Instantiate(projectile, blaster.transform.position, blaster.transform.rotation);
+			}
 		}
 
 		// if you're not moving forward and your moving, progressively slow down

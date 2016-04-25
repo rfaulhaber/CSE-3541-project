@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class camera_controller : MonoBehaviour {
@@ -30,13 +31,23 @@ public class camera_controller : MonoBehaviour {
 
 	void LateUpdate()
 	{
-		playerSpeed = playerRB.velocity.magnitude;
-		playerDirection = playerRB.transform.eulerAngles;
+		if (score_controller.state == score_controller.GameState.PLAYING)
+		{
+			playerSpeed = playerRB.velocity.magnitude;
+			playerDirection = playerRB.transform.eulerAngles;
 
-		speedText.text = playerSpeed.ToString();
-		directionText.text = playerDirection.ToString();
+			speedText.text = playerSpeed.ToString();
+			directionText.text = playerDirection.ToString();
 
-		scoreMesh.text = "Score: " + score_controller.score.ToString();
-		livesMesh.text = "Lives: " + score_controller.lives.ToString();
+			scoreMesh.text = "Score: " + score_controller.score.ToString();
+			livesMesh.text = "Lives: " + score_controller.lives.ToString();
+		} else
+		{
+			speedText.text = "";
+			directionText.text = "";
+
+			scoreMesh.text = "";
+			livesMesh.text = "";
+		}
 	}
 }

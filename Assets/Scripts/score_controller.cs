@@ -11,8 +11,8 @@ public class score_controller : MonoBehaviour {
 	public enum GameState { PLAYING, PAUSED, MAIN_MENU }
 	public enum Difficulty { EASY, HARD, EXTREME }
 
-	public GameState state = GameState.PLAYING;
-	public Difficulty difficulty = Difficulty.EASY;
+	public static GameState state = GameState.PLAYING;
+	public static Difficulty difficulty = Difficulty.EASY;
 
 	void Start()
 	{
@@ -35,7 +35,7 @@ public class score_controller : MonoBehaviour {
 			GameObject.Find("death_camera").GetComponent<Camera>().enabled = true;
 			GameObject.Find("player_camera").GetComponent<Camera>().enabled = false;
 
-			player.transform.position = new Vector3(-2000, 2000, 2000);
+			state = GameState.PAUSED;
 		}
 
 		else
@@ -50,5 +50,7 @@ public class score_controller : MonoBehaviour {
 		GameObject.Find("player_camera").GetComponent<Camera>().enabled = true;
 		lives = 3;
 		score = 0;
+
+		state = GameState.PLAYING;
 	}
 }
