@@ -8,13 +8,21 @@ public class asteroid_controller : MonoBehaviour {
     public float init_delay = 2;
     public bool collided = false;
 
-    // Use this for initialization
-    void Start () {
+	public AudioClip explosionClip;
+	private AudioSource source;
+	private float lowPitchRange = .75F;
+	private float highPitchRange = 1.5F;
+	private float velToVol = .2F;
+	private float velocityClipSplit = 10F;
+
+	// Use this for initialization
+	void Start () {
         rotation = new Vector3(Random.Range(-.3F, .3F), Random.Range(-.3F, .3F), Random.Range(-.3F, .3F));
         movement = new Vector3(Random.Range(-1F, 1F), Random.Range(-1F, 1F), Random.Range(-1F, 1F));
         player = GameObject.Find("drone");
-    }
-	
+		source = GetComponent<AudioSource>();
+	}
+
 	// Update is called once per frame
 	void Update () {
         transform.Rotate(rotation);
@@ -32,7 +40,12 @@ public class asteroid_controller : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter(Collision col)
+	void Awake()
+	{
+		//source = GetComponent<AudioSource>();
+	}
+
+	void OnCollisionEnter(Collision col)
     {
         if (!collided && init_delay <= 0)
         {
@@ -46,8 +59,11 @@ public class asteroid_controller : MonoBehaviour {
             MakeSmallAsteroid();
             Destroy(col.gameObject);
             Destroy(gameObject);
-        }
-    }
+
+			source.PlayOneShot(source.clip, 0.5f);
+
+		}
+	}
 
     void MakeSmallAsteroid()
     {

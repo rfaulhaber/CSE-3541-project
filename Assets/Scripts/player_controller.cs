@@ -9,6 +9,8 @@ public class player_controller : MonoBehaviour {
 	private Vector3 currentVelocity = Vector3.zero;
 	private Vector3 currentAngularVelocity = Vector3.zero;
 
+	private AudioSource blasterAudio;
+
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>();
@@ -67,6 +69,7 @@ public class player_controller : MonoBehaviour {
 			{
 				GameObject blaster = GameObject.FindGameObjectWithTag("blaster");
 				Instantiate(projectile, blaster.transform.position, blaster.transform.rotation);
+				blaster.GetComponent<AudioSource>().PlayOneShot(blaster.GetComponent<AudioSource>().clip);
 			}
 		}
 
