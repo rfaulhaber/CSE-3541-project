@@ -19,6 +19,8 @@ public class camera_controller : MonoBehaviour {
 		playerRB = player.GetComponent<Rigidbody>();
 		playerSpeed = playerRB.velocity.magnitude;
 		playerDirection = playerRB.transform.forward;
+		GameObject.Find("death_camera").GetComponent<Camera>().enabled = false;
+		GameObject.Find("Canvas").GetComponent<Canvas>().enabled = false;
 	}
 
 	void Update()
